@@ -780,40 +780,16 @@ const HOSTS = HOSTS_DATA.map(h => h.name).join(" & ");
 const SHARE_URL = "https://cafebetclic.github.io/"; // rempli par build.ps1 (lien Claude ou adresse du site)
 const EPISODES = [
   {
-    n: 3,
-    title: "Ligue des champions : nos 3 paris de la semaine",
-    subject: "Ligue des champions",
-    date: "2026-09-16",
-    duration: null,
-    yt: null,
-    src: null,
-    link: null,
-    desc: "Première journée de la phase de ligue. On passe les affiches au crible, on compare les cotes et on sort chacun trois paris — avec les mises, pour de vrai. Thibaud a promis d'être raisonnable. Cote : 3,40.",
-    example: true
-  },
-  {
-    n: 2,
-    title: "Combiné ou simple ? Le grand débat",
-    subject: "Stratégie",
-    date: "2026-09-09",
-    duration: null,
-    yt: null,
-    src: null,
-    link: null,
-    desc: "Le combiné qui fait rêver contre le simple qui rapporte. Espérance de gain, marge du bookmaker, gestion de bankroll : on tranche, café à la main. Spoiler : personne ne change d'avis.",
-    example: true
-  },
-  {
     n: 1,
-    title: "Ligue 1 : les affiches de la reprise",
-    subject: "Ligue 1",
-    date: "2026-09-02",
-    duration: null,
-    yt: null,
+    title: "Le premier café",
+    subject: "Vidéo test",
+    date: "2026-09-19",
+    duration: 1499,
+    yt: "https://youtu.be/9s4AIns5IRM",
     src: null,
     link: null,
-    desc: "Premier café de la saison. Tour d'horizon des favoris, des cotes surprenantes de la reprise et de nos règles du jeu pour l'année. On les a tenues jusqu'à la deuxième journée.",
-    example: true
+    desc: "Vidéo de test pour vérifier que tout marche : le lecteur, la barre du bas, le café. Le vrai premier épisode arrive. Nantes sera safe, paraît-il.",
+    example: true, badge: "Test"
   }
 ];
 
@@ -1102,7 +1078,7 @@ function renderRows(){
         '<span class="p" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16"><path fill="currentColor" d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"/></svg></span>' +
         '<span class="eq" aria-hidden="true"><i></i><i></i><i></i></span></div>' +
       '<div class="tcell c2">' + tile(ep, "s40", 40) +
-        '<div class="t"><b>' + esc(ep.title) + (ep.example ? ' <span class="badge ex">Exemple</span>' : "") + '</b><span>' + esc(HOSTS) + '</span></div></div>' +
+        '<div class="t"><b>' + esc(ep.title) + (ep.example ? ' <span class="badge ex">' + esc(ep.badge || "Exemple") + '</span>' : "") + '</b><span>' + esc(HOSTS) + '</span></div></div>' +
       '<div class="c3">' + esc(ep.subject) + '</div>' +
       '<div class="c4">' + fmtDate(ep.date) + '</div>' +
       '<div class="c5">' + (hasVideo(ep) ? fmtTime(d) : "—") + '</div>' +
@@ -1258,7 +1234,7 @@ function select(ep, autoplay){
   els.np.hidden = false;
   els.npTitle.textContent = ep.title;
   const d = durationOf(ep);
-  els.npSub.innerHTML = '<span>Épisode ' + ep.n + '</span><span>•</span><span>' + esc(ep.subject) + '</span><span>•</span><span>' + fmtDate(ep.date) + '</span>' + (hasVideo(ep) && d ? '<span>•</span><span>' + fmtTime(d) + '</span>' : "") + (ep.example ? '<span>•</span><span class="badge ex">Exemple</span>' : "");
+  els.npSub.innerHTML = '<span>Épisode ' + ep.n + '</span><span>•</span><span>' + esc(ep.subject) + '</span><span>•</span><span>' + fmtDate(ep.date) + '</span>' + (hasVideo(ep) && d ? '<span>•</span><span>' + fmtTime(d) + '</span>' : "") + (ep.example ? '<span>•</span><span class="badge ex">' + esc(ep.badge || "Exemple") + '</span>' : "");
   els.npDesc.textContent = ep.desc || "";
   els.fsBtn.hidden = !hasVideo(ep);
   els.fullLink.hidden = !ep.link;
